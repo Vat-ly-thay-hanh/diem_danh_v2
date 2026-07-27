@@ -1,0 +1,541 @@
+/* ============================= */
+/* RESET                         */
+/* ============================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    font-size:16px;
+}
+
+body{
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    background:#d8f4ff;
+    color:#111;
+    min-height:100vh;
+    user-select:none;
+}
+
+/* ============================= */
+/* APP                           */
+/* ============================= */
+
+#app{
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    padding:16px;
+}
+
+/* ============================= */
+/* HEADER                        */
+/* ============================= */
+header{
+    margin-bottom:20px;
+    text-align:center;
+}
+
+header h1{
+    font-size:2rem;
+    font-weight:bold;
+}
+
+/* ============================= */
+/* CARD                          */
+/* ============================= */
+.card{
+    background:white;
+    border:2px solid #222;
+    border-radius:10px;
+    padding:16px;
+    margin-bottom:18px;
+}
+
+/* ============================= */
+/* LABEL                         */
+/* ============================= */
+label{
+    font-weight:bold;
+}
+
+/* ============================= */
+/* INPUT                         */
+/* ============================= */
+input{
+    flex:1;
+    height:42px;
+    border:2px solid #444;
+    border-radius:8px;
+    padding:8px;
+    font-size:1rem;
+    outline:none;
+}
+
+input:focus{
+    border-color:#2196F3;
+}
+
+/* ============================= */
+/* SELECT                        */
+/* ============================= */
+select{
+    flex:1;
+    height:42px;
+    border:2px solid #444;
+    border-radius:8px;
+    padding:8px;
+    font-size:1rem;
+    background:white;
+}
+
+/* ============================= */
+/* BUTTON                        */
+/* ============================= */
+button{
+    width:100%;
+    height:48px;
+    border:none;
+    border-radius:8px;
+    background:#1976D2;
+    color:white;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    background:#1565C0;
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+button:disabled{
+    background:#bfbfbf;
+    cursor:not-allowed;
+}
+
+/* ============================= */
+/* TITLE                         */
+/* ============================= */
+h2{
+    margin-bottom:14px;
+    text-align:center;
+}
+
+/* ============================= */
+/* TABLE                         */
+/* ============================= */
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#e8f4ff;
+    border:1px solid #999;
+    padding:10px;
+}
+
+td{
+    border:1px solid #999;
+    padding:10px;
+}
+
+/* ============================= */
+/* COUNT                         */
+/* ============================= */
+#seatCount{
+    color:#0d8d00;
+    font-weight:bold;
+}
+
+/* ============================= */
+/* SCROLLBAR                     */
+/* ============================= */
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#9c9c9c;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#ececec;
+}
+
+.infoRow{
+    display:flex;
+    align-items:center;
+    padding:8px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.infoTitle{
+    width:110px;
+    font-weight:bold;
+    flex-shrink:0;
+}
+
+.infoValue{
+    flex:1;
+    min-height:28px;
+    word-break:break-word;
+}
+
+/* ====================================================== */
+/* SƠ ĐỒ LỚP                                              */
+/* ====================================================== */
+
+#seatMap{
+    display:grid;
+    grid-template-columns:repeat(9,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+
+/* ====================================================== */
+/* GHẾ                                                    */
+/* ====================================================== */
+.seat{
+    aspect-ratio:1 / 1;
+    border-radius:10px;
+    border:2px solid #222;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:0.2s;
+    font-weight:bold;
+    background:#ff7070;
+    overflow:hidden;
+}
+
+/* ====================================================== */
+/* LỐI ĐI                                                 */
+/* ====================================================== */
+.aisle{
+    visibility:hidden;
+}
+
+/* ====================================================== */
+/* TÊN VỊ TRÍ                                             */
+/* ====================================================== */
+.seatID{
+    font-size:1rem;
+    font-weight:bold;
+}
+
+/* ====================================================== */
+/* TÊN HỌC SINH                                           */
+/* ====================================================== */
+.seatName{
+    margin-top:4px;
+    font-size:0.72rem;
+    text-align:center;
+    line-height:1.1;
+    width:95%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+/* ====================================================== */
+/* GHẾ CHƯA GÁN                                           */
+/* ====================================================== */
+.seat-empty{
+    background:#ff6b6b;
+    color:white;
+}
+
+/* ====================================================== */
+/* GHẾ ĐÃ GÁN                                             */
+/* ====================================================== */
+.seat-full{
+    background:#38b000;
+    color:white;
+}
+
+/* ====================================================== */
+/* GHẾ ĐANG CHỌN                                          */
+/* ====================================================== */
+.seat-selected{
+    background:#ffd43b !important;
+    color:black;
+    transform:scale(1.08);
+    border:3px solid #111;
+    z-index:5;
+}
+
+/* ====================================================== */
+/* GHẾ DISABLE                                            */
+/* ====================================================== */
+.seat-disable{
+    opacity:.5;
+    pointer-events:none;
+}
+
+/* ====================================================== */
+/* HOVER                                                  */
+/* ====================================================== */
+.seat:hover{
+    transform:scale(1.05);
+}
+
+/* ====================================================== */
+/* ACTIVE                                                 */
+/* ====================================================== */
+.seat:active{
+    transform:scale(.95);
+}
+
+/* ====================================================== */
+/* HÀNG GHẾ                                               */
+/* ====================================================== */
+.seatRowTitle{
+    grid-column:1/-1;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* ====================================================== */
+/* THÔNG TIN CHỖ NGỒI                                     */
+/* ====================================================== */
+#seatInfo{
+    display:block;
+}
+
+/* ====================================================== */
+/* CARD THÔNG TIN                                         */
+/* ====================================================== */
+.infoGrid{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+
+/* ====================================================== */
+/* BỘ ĐẾM                                                 */
+/* ====================================================== */
+#seatCounter{
+    text-align:center;
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
+/* ====================================================== */
+/* HIỆU ỨNG NHẤP NHÁY                                     */
+/* ====================================================== */
+@keyframes flashGreen{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.15);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+.flash{
+    animation:flashGreen .35s;
+}
+
+/* ====================================================== */
+/* RESPONSIVE                                             */
+/* ====================================================== */
+@media(max-width:650px){
+    #seatMap{
+        gap:7px;
+    }
+    .seatID{
+        font-size:.82rem;
+    }
+    .seatName{
+        font-size:.58rem;
+    }
+}
+@media(max-width:480px){
+    #seatMap{
+        gap:5px;
+    }
+    .seatID{
+        font-size:.72rem;
+    }
+    .seatName{
+        display:none;
+    }
+}
+
+/* ========================================================================== */
+/* Dialog                                                                     */
+/* ========================================================================== */
+dialog {
+    margin: auto;
+    width: 90%;
+    max-width: 650px;
+    border: none;
+    border-radius: 12px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,.3);
+}
+
+dialog::backdrop {
+    background: rgba(0,0,0,.45);
+}
+
+/* ========================================================================== */
+/* Tiêu đề                                                                    */
+/* ========================================================================== */
+dialog h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ========================================================================== */
+/* Table                                                                      */
+/* ========================================================================== */
+dialog table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+dialog th {
+    width: 120px;
+    text-align: left;
+    padding: 8px;
+}
+
+dialog td {
+    padding: 8px;
+}
+
+dialog input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* ========================================================================== */
+/* Row                                                                         */
+/* ========================================================================== */
+.row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.row input{
+    flex:1;
+    width:auto;
+    min-width:0;
+}
+
+/* ========================================================================== */
+/* Button Row                                                                  */
+/* ========================================================================== */
+.buttonRow{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+}
+
+.buttonRow button{
+    flex:1;
+    min-width:100px;
+}
+
+/* ========================================================================== */
+/* Search Result                                                               */
+/* ========================================================================== */
+#searchResult {
+    margin-top: 15px;
+    border: 1px solid #cccccc;
+    height: 300px;
+    overflow-y: auto;
+}
+
+/* ========================================================================== */
+/* Search Item                                                                 */
+/* ========================================================================== */
+.search-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.search-item:hover {
+    background: #eeeeee;
+}
+
+.search-item.selected {
+    background: #ff4040;
+    color: white;
+}
+
+/* ========================================================================== */
+/* Success / Error                                                             */
+/* ========================================================================== */
+.success{
+    text-align:center;
+    color:#0d8d00;
+    font-size:1.3rem;
+    font-weight:bold;
+}
+
+.error{
+    text-align:center;
+    color:red;
+    font-size:1.3rem;
+    font-weight:bold;
+}
+
+/* ========================================================================== */
+/* Loading                                                                     */
+/* ========================================================================== */
+#dlgLoading p {
+    text-align: center;
+    font-size: 18px;
+    margin: 30px 0;
+}
+
+/* ==========================================
+   Dòng tìm kiếm
+========================================== */
+.searchRow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.searchRow input{
+    flex:1;
+    min-width:0;
+    height:42px;
+    padding:0 12px;
+    font-size:16px;
+}
+
+.searchRow button{
+    width:120px;
+    flex-shrink:0;
+}

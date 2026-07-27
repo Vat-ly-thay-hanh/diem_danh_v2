@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Điểm danh học sinh vật lý thầy Hạnh</title>
+    <meta name="theme-color" content="#d8f3ff">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div id="app">
+    <!-- Tiêu đề ứng dụng -->
+    <header>
+        <h1>Điểm danh học sinh vật lý thầy Hạnh</h1>
+    </header>
+
+    <!-- Khối: Chọn lớp học -->
+    <section class="card">
+        <div class="row">
+            <label for="chonLop">Chọn lớp:</label>
+            <select id="chonLop">
+                <option value=""></option>
+                <option value="12">12</option>
+                <option value="11">11</option>
+                <option value="10">10</option>
+                <option value="9">9</option>
+            </select>
+            <label for="nhapCot">Nhập cột:</label>
+            <input id="nhapCot" type="text" maxlength="5">
+            <label for="soCot">Số buổi đã học:</label>
+            <select id="soCot">
+                <option value=""></option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>                
+            </select>            
+        </div>
+        <button id="btnLayThongTin">Lấy thông tin</button>
+    </section>
+
+    <!-- Khối: Sơ đồ lớp học -->
+    <section class="card">
+        <h2>Sơ đồ lớp</h2>
+        <div id="seatMap">
+        </div>
+    </section>
+
+    <!-- Khối: Chi tiết thông tin chỗ ngồi -->
+    <section id="seatInfo" class="card">
+        <h2>Thông tin chỗ ngồi</h2>
+
+        <div class="buttonRow">
+            <button id="btnMoi">Thêm mới</button>
+            <button id="btnSua">Chỉnh sửa</button>
+            <button id="btnTim">Tìm</button>
+            <button id="btnXoa">Xóa</button>
+        </div>
+
+        <div class="infoRow">
+            <span class="infoTitle">Họ: </span>
+            <span id="infoHo" class="infoValue"></span>
+        </div>
+
+        <div class="infoRow">
+            <span class="infoTitle">Tên: </span>
+            <span id="infoTen" class="infoValue"></span>
+        </div>
+
+        <div class="infoRow">
+            <span class="infoTitle">SĐT PH: </span>
+            <span id="infoPH" class="infoValue"></span>
+        </div>
+
+        <div class="infoRow">
+            <span class="infoTitle">SĐT HS: </span>
+            <span id="infoHS" class="infoValue"></span>
+        </div>
+
+        <div class="infoRow">
+            <span class="infoTitle">Trường: </span>
+            <span id="infoTruong" class="infoValue"></span>
+        </div>
+
+        <div class="infoRow">
+            <span class="infoTitle">Trạng thái: </span>
+            <span id="infoStatus" class="infoValue"></span>
+        </div>
+
+    </section>
+
+    <!-- Khối: Bộ đếm sĩ số đã xếp chỗ -->
+    <section class="card">
+        <h2>Có <span id="seatCount">0</span> chỗ ngồi đã điểm danh</h2>
+    </section>
+
+    <!-- Khối: Nút đẩy dữ liệu điểm danh -->
+    <section class="card">
+        <button id="btnAttendance">Điểm danh</button>
+    </section>
+</div>
+
+<!-- ========================================================= -->
+<!-- DIALOG CHỨC NĂNG (GỐC HTML5)                              -->
+<!-- ========================================================= -->
+
+<!-- 1.Hộp thoại: Chỉnh sửa học sinh -->
+<dialog id="dlgEdit">
+    <h2>Thông tin học sinh</h2>
+    <table>
+        <tr>
+            <th>Họ</th>
+            <td><input id="editHo"></td>
+        </tr>
+        <tr>
+            <th>Tên</th>
+            <td><input id="editTen"></td>
+        </tr>
+        <tr>
+            <th>SĐT PH</th>
+            <td><input id="editPH"></td>
+        </tr>
+        <tr>
+            <th>SĐT HS</th>
+            <td><input id="editHS"></td>
+        </tr>
+        <tr>
+            <th>Trường</th>
+            <td><input id="editTruong"></td>
+        </tr>
+    </table>
+    <div class="buttonRow">
+        <button id="btnLuu">Lưu</button>
+        <button id="btnHuy">Hủy</button>
+    </div>
+</dialog>
+
+<!-- 2.Hộp thoại: Tìm kiếm học sinh -->
+<dialog id="dlgSearch">
+    <h2>Tìm học sinh</h2>
+    <div class="searchRow">
+        <input
+            id="searchText"
+            type="text"
+            placeholder="Nhập tên học sinh...">
+        <button id="btnSearch">
+            Tìm kiếm
+        </button>
+    </div>
+    <div id="searchResult"></div>
+    <div class="buttonRow">
+        <button id="btnGan">
+            Gán
+        </button>
+        <button id="btnThoat">
+            Thoát
+        </button>
+    </div>
+</dialog>
+
+<!-- 3.Hộp thoại: Xác nhận lưu điểm danh -->
+<dialog id="dlgConfirm">
+    <h2>Điểm danh</h2>
+    <p>Bạn có chắc chắn muốn ghi dữ liệu điểm danh?</p>
+    <div class="buttonRow">
+        <button id="btnYes">Có</button>
+        <button id="btnNo">Không</button>
+    </div>
+</dialog>
+
+<!-- 4.Hộp thoại: Trạng thái đang lưu dữ liệu -->
+<dialog id="dlgLoading">
+    <h2>Điểm danh</h2>
+    <p>Đang ghi dữ liệu tiến trình...</p>
+</dialog>
+
+<!-- 5.Hộp thoại: Báo cáo thành công -->
+<dialog id="dlgSuccess">
+    <h2>Điểm danh</h2>
+    <p class="success">Ghi nhận dữ liệu thành công!</p>
+    <div class="buttonRow">
+        <button id="btnBack">Quay lại</button>
+        <button id="btnF5">Tải lại trang</button>
+    </div>
+</dialog>
+
+<!-- 6.Hộp thoại: Báo cáo thất bại -->
+<dialog id="dlgError">
+    <h2>Điểm danh</h2>
+    <p class="error">Đã có lỗi xảy ra. Tiến trình thất bại!</p>
+    <div class="buttonRow">
+        <button id="btnBackError">Quay lại</button>
+    </div>
+</dialog>
+
+<!-- nạp duy nhất tệp tin đầu não dưới dạng ES6 Module -->
+<script src="script.js" type="module"></script>
+
+</body>
+</html>
