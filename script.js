@@ -109,9 +109,9 @@ function renderSeatMap(students = []) {
     const seatMap = document.getElementById("seatMap");
     seatMap.innerHTML = "";
     
-    // Tạo 72 vị trí ngồi chia làm 2 dãy, mỗi dãy 9 bàn, mỗi bàn có 4 chỗ ngồi
+    // Tạo 80 vị trí ngồi chia làm 2 dãy, mỗi dãy 10 bàn, mỗi bàn có 4 chỗ ngồi
     const columns = ["A", "B", "C", "D", "", "E", "F", "G", "H"];
-    for (let row = 9; row >= 1; row--) {
+    for (let row = 10; row >= 1; row--) {
         columns.forEach(column => {
             if (column === "") {
                 const gap = document.createElement("div");
