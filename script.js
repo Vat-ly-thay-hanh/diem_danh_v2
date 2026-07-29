@@ -82,7 +82,7 @@ async function loadStudents() {
             ...student,
 
             // Không ghi vào chỗ ngồi của học sinh những học sinh vắng học
-            seat: /^(10|[1-10])[A-H]$/.test(student.seat)
+            seat: /^(10|[1-9])[A-H]$/.test(student.seat)
             ? student.seat
             : "",
 
