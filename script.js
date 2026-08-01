@@ -573,6 +573,8 @@ const btnBack = document.getElementById("btnBack");
     btnBack.onclick = () => {document.getElementById("dlgSuccess").close();};
 const btnF5 = document.getElementById("btnF5");
     btnF5.onclick = () => {location.reload();};
+const btnBackError = document.getElementById("btnBackError");
+    btnBack.onclick = () => {document.getElementById("dlgError").close();};
 
 // Hàm Enable-Disnable các nút bấm
 async function updateButton() {
