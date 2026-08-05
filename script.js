@@ -38,6 +38,8 @@ const dlgConfirm = document.getElementById("dlgConfirm");
 const dlgLoading = document.getElementById("dlgLoading");
 const dlgSuccess = document.getElementById("dlgSuccess");
 const dlgError = document.getElementById("dlgError");
+const infoClassColumn = document.getElementById("infoClassColumn");
+const titleSeatmap = document.getElementById("titleSeatmap");
 
 // Khai báo các ô điền lớp, cột điểm danh và số buổi đã học
 const classStudent = document.getElementById("chonLop");
@@ -116,6 +118,9 @@ async function loadStudents() {
  ******************************************************************************/
 function renderSeatMap(students = []) {
     btnLayThongTin.textContent = "Đã lấy thông tin thành công";
+    infoClassColumn.hidden = true;
+    titleSeatmap.textContent =
+    `Sơ đồ lớp ${classStudent.value} cột ${column.value} buổi ${Number(numColumn.value) + 1}`;
     const seatMap = document.getElementById("seatMap");
     seatMap.innerHTML = "";
     
@@ -603,6 +608,7 @@ btnMoi.disabled = true;
 btnSua.disabled = true;
 btnTim.disabled = true;
 btnXoa.disabled = true;
+infoClassColumn.hidden = false;
 
 updateButton();
 document.getElementById("chonLop").addEventListener("change", updateButton);

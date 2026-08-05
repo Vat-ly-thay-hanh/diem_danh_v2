@@ -14,11 +14,12 @@
 <div id="app">
     <!-- Tiêu đề ứng dụng -->
     <header>
-        <h1>Điểm danh học sinh vật lý thầy Hạnh</h1>
+        <h1>Điểm danh học sinh</h1>
+        <h2>Vật lý thầy Hạnh 0989739841</h2>
     </header>
 
     <!-- Khối: Chọn lớp học -->
-    <section class="card">
+    <section id = "infoClassColumn" class="card">
         <div class="row">
             <label for="chonLop">Chọn lớp:</label>
             <select id="chonLop">
@@ -48,7 +49,7 @@
 
     <!-- Khối: Sơ đồ lớp học -->
     <section class="card">
-        <h2>Sơ đồ lớp</h2>
+        <h2 id = titleSeatmap></h2>
         <div id="seatMap">
         </div>
     </section>
