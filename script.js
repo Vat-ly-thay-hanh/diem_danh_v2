@@ -38,8 +38,13 @@ const dlgConfirm = document.getElementById("dlgConfirm");
 const dlgLoading = document.getElementById("dlgLoading");
 const dlgSuccess = document.getElementById("dlgSuccess");
 const dlgError = document.getElementById("dlgError");
+
 const infoClassColumn = document.getElementById("infoClassColumn");
+const infoSeatmap = document.getElementById("infoSeatmap");
 const titleSeatmap = document.getElementById("titleSeatmap");
+const seatInfo = document.getElementById("seatInfo");
+const infoSeatCount = document.getElementById("infoSeatCount");
+const btnAttendanceInfo = document.getElementById("btnAttendanceInfo");
 
 // Khai báo các ô điền lớp, cột điểm danh và số buổi đã học
 const classStudent = document.getElementById("chonLop");
@@ -119,8 +124,13 @@ async function loadStudents() {
 function renderSeatMap(students = []) {
     btnLayThongTin.textContent = "Đã lấy thông tin thành công";
     infoClassColumn.hidden = true;
+    infoSeatmap.hidden = false;
+    seatInfo.hidden = false;
+    infoSeatCount.hidden = false;
+    btnAttendanceInfo.hidden = false;
+
     titleSeatmap.textContent =
-    `Sơ đồ lớp ${classStudent.value} cột ${column.value} buổi ${Number(numColumn.value) + 1}`;
+    `Sơ đồ lớp ${classStudent.value} cột ${column.value.trim().toUpperCase()} buổi ${Number(numColumn.value) + 1}`;
     const seatMap = document.getElementById("seatMap");
     seatMap.innerHTML = "";
     
@@ -608,7 +618,15 @@ btnMoi.disabled = true;
 btnSua.disabled = true;
 btnTim.disabled = true;
 btnXoa.disabled = true;
+
+//Hiện chọn lớp, cột, buổi học
 infoClassColumn.hidden = false;
+
+//Ẩn các mục còn lại
+infoSeatmap.hidden = true;
+seatInfo.hidden = true;
+infoSeatCount.hidden = true;
+btnAttendanceInfo.hidden = true;
 
 updateButton();
 document.getElementById("chonLop").addEventListener("change", updateButton);
